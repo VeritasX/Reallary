@@ -14,17 +14,20 @@ export default class ReallaryBasePlayer extends Component {
     this.isVideo = this.isVideo.bind(this);
     this.isSlider = this.isSlider.bind(this);
     this.isGallery = this.isGallery.bind(this);
+    this.changeSource = this.changeSource.bind(this);
+    this.generateThumbnails = this.generateThumbnails.bind(this);
+    this.checkMediaType = this.checkMediaType.bind(this);
   }
 
-  isVideo(source, altText) {
+  isVideo(currentItem) {
     //return the Video Component
   }
 
-  isSlider() {
+  isSlider(currentItem) {
     //return the Slider Component
   }
 
-  isGallery() {
+  isGallery(currentItem) {
     // return the Photo Gallery Component
   }
 
@@ -37,7 +40,17 @@ export default class ReallaryBasePlayer extends Component {
   }
 
   checkMediaType() {
-    //Check the media type and return the required component
+    if (this.state.mediaType === 'video') {
+      return this.isVideo(this.state.currentItem);
+    } else if (this.state.mediaType === 'photo') {
+      return this.isGallery(this.state.currentItem);
+    } else if (this.state.mediaType === 'slider') {
+      return this.isSlider(this.state.currentItem);
+    } else {
+      console.error(
+        'Please add a media type to your component, the following media type flags can be used: "video", "photo", "slider"'
+      );
+    }
   }
 
   render() {
