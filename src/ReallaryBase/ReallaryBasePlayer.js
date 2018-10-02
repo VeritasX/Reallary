@@ -58,7 +58,7 @@ export default class ReallaryBasePlayer extends Component {
   }
 }
 
-ReallaryBasePlayer.PropTypes = {
+ReallaryBasePlayer.propTypes = {
   source: PropTypes.array.isRequired,
   mediaType: PropTypes.string.isRequired,
   thumbnails: PropTypes.array

@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
+import ReallaryBasePlayer from './ReallaryBase/ReallaryBasePlayer';
 
 class App extends Component {
   render() {
-    return <div>{/*
-          Reallary Base Component will go here 
-        */}</div>;
+    return (
+      <div>
+        <ReallaryBasePlayer />
+      </div>
+    );
   }
 }
 
