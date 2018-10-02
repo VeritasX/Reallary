@@ -19,16 +19,16 @@ export default class ReallaryBasePlayer extends Component {
     this.checkMediaType = this.checkMediaType.bind(this);
   }
 
-  isVideo(currentItem) {
-    //return the Video Component
+  isVideo(currentItem, source, thumbnails) {
+    //return the Video Component wrapped with the thumbnail component
   }
 
-  isSlider(currentItem) {
+  isSlider(currentItem, source) {
     //return the Slider Component
   }
 
-  isGallery(currentItem) {
-    // return the Photo Gallery Component
+  isGallery(currentItem, source, thumbnails) {
+    // return the Photo Gallery Component wrapped with the thumbnail component
   }
 
   changeSource() {
@@ -54,11 +54,12 @@ export default class ReallaryBasePlayer extends Component {
   }
 
   render() {
-    return <div className="main-player" />;
+    return <div className="main-player">{this.checkMediaType()}</div>;
   }
 }
 
 ReallaryBasePlayer.PropTypes = {
-  source: PropTypes.array,
-  mediaType: PropTypes.string
+  source: PropTypes.array.isRequired,
+  mediaType: PropTypes.string.isRequired,
+  thumbnails: PropTypes.array
 };
