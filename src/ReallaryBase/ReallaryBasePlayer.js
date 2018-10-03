@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import './ReallaryBasePlayer.css';
 
-export default class ReallaryBasePlayer extends Component {
-  constructor() {
+class ReallaryBasePlayer extends Component {
+  constructor(props) {
     super();
     this.state = {
-      source: this.props.source,
-      mediaType: this.props.mediaType,
+      source: props.source,
+      mediaType: props.mediaType,
       currentItem: 0
     };
 
@@ -63,3 +63,5 @@ ReallaryBasePlayer.propTypes = {
   mediaType: PropTypes.string.isRequired,
   thumbnails: PropTypes.array
 };
+
+export default ReallaryBasePlayer;
