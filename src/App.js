@@ -6,7 +6,7 @@ class App extends Component {
   render() {
     return (
       <div>
-        <ReallaryBasePlayer source={data} mediaType="slider" />
+        <ReallaryBasePlayer source={data} mediaType="slider" height="480px" />
       </div>
     );
   }
