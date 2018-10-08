@@ -11,7 +11,8 @@ class ReallaryBasePlayer extends Component {
       source: props.source,
       mediaType: props.mediaType,
       currentItem: 0,
-      windowSize: 0,
+      windowWidth: 0,
+      windowHeight: 0,
       height: props.height
     };
 
@@ -26,12 +27,19 @@ class ReallaryBasePlayer extends Component {
 
   resizeHandler() {
     this.setState({
-      windowSize: window.innerWidth
+      windowWidth: window.innerWidth
+    });
+    this.setState({
+      windowHeight: window.innerHeight
     });
   }
   componentDidMount() {
     this.resizeHandler();
     window.addEventListener('resize', this.resizeHandler.bind(this));
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.resizeHandler.bind(this));
   }
 
   isVideo(currentItem, source, thumbnails) {
@@ -44,7 +52,8 @@ class ReallaryBasePlayer extends Component {
         source={this.state.source}
         currentItem={this.state.currentItem}
         height={this.state.height}
-        windowSize={this.state.windowSize}
+        windowWidth={this.state.windowWidth}
+        windowHeight={this.state.windowHeight}
       />
     );
   }
