@@ -9,13 +9,14 @@ const ReallarySlider = props => {
     bgSize = 'cover';
     Height = props.height;
   } else {
-    bgSize = `100% ${0.3 * props.windowHeight + 'px'}`;
+    bgSize = `cover`;
     Height = 0.3 * props.windowHeight + 'px';
   }
   const Div = styled.div`
     background-image: url(${backgroundPicture});
     background-size: ${bgSize};
     background-repeat: no-repeat;
+    background-position: center center;
     width: 100%;
     height: ${Height};
   `;
