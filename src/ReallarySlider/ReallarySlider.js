@@ -1,27 +1,40 @@
-import React from 'react';
+import React, { Component } from 'react';
 import styled from 'styled-components';
 
-const ReallarySlider = props => {
-  let bgSize;
-  let Height;
-  let backgroundPicture = props.source[props.currentItem].src;
-  if (props.windowWidth >= 900) {
-    bgSize = 'cover';
-    Height = props.height;
-  } else {
-    bgSize = `cover`;
-    Height = 0.3 * props.windowHeight + 'px';
+class ReallarySlider extends Component {
+  componentDidMount() {
+    this.transtion = setInterval(() => {
+      this.props.nextFunction();
+    }, 10000);
   }
-  const Div = styled.div`
-    background-image: url(${backgroundPicture});
-    background-size: ${bgSize};
-    background-repeat: no-repeat;
-    background-position: center center;
-    width: 100%;
-    height: ${Height};
-  `;
 
-  return <Div />;
-};
+  componentWillUnmount() {
+    clearInterval(this.transition);
+  }
+
+  render() {
+    let bgSize;
+    let Height;
+    let backgroundPicture = this.props.source[this.props.currentItem].src;
+    if (this.props.windowWidth >= 900) {
+      bgSize = 'cover';
+      Height = this.props.height;
+    } else {
+      bgSize = `cover`;
+      Height = 0.3 * this.props.windowHeight + 'px';
+    }
+    const Div = styled.div`
+      background-image: url(${backgroundPicture});
+      background-size: ${bgSize};
+      background-repeat: no-repeat;
+      background-position: center center;
+      width: 100%;
+      height: ${Height};
+      transition: ease-in-out 1s;
+    `;
+
+    return <Div />;
+  }
+}
 
 export default ReallarySlider;

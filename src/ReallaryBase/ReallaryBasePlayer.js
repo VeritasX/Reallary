@@ -23,6 +23,7 @@ class ReallaryBasePlayer extends Component {
     this.generateThumbnails = this.generateThumbnails.bind(this);
     this.checkMediaType = this.checkMediaType.bind(this);
     this.resizeHandler = this.resizeHandler.bind(this);
+    this.goToTheNextItem = this.goToTheNextItem.bind(this);
   }
 
   resizeHandler() {
@@ -42,6 +43,21 @@ class ReallaryBasePlayer extends Component {
     window.removeEventListener('resize', this.resizeHandler.bind(this));
   }
 
+  goToTheNextItem() {
+    const newItem = this.state.currentItem + 1;
+    const lengthOfData = this.state.source.length - 1;
+    console.log(this.state.currentItem);
+    if (newItem <= lengthOfData) {
+      this.setState({
+        currentItem: newItem
+      });
+    } else {
+      this.setState({
+        currentItem: 0
+      });
+    }
+  }
+
   isVideo(currentItem, source, thumbnails) {
     //return the Video Component wrapped with the thumbnail component
   }
@@ -54,6 +70,7 @@ class ReallaryBasePlayer extends Component {
         height={this.state.height}
         windowWidth={this.state.windowWidth}
         windowHeight={this.state.windowHeight}
+        nextFunction={this.goToTheNextItem}
       />
     );
   }
