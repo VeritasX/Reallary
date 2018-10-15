@@ -71,6 +71,7 @@ class ReallaryBasePlayer extends Component {
         windowWidth={this.state.windowWidth}
         windowHeight={this.state.windowHeight}
         nextFunction={this.goToTheNextItem}
+        child={this.props.child}
       />
     );
   }
@@ -110,7 +111,8 @@ ReallaryBasePlayer.propTypes = {
   source: PropTypes.array.isRequired,
   mediaType: PropTypes.string.isRequired,
   thumbnails: PropTypes.array,
-  height: PropTypes.string.isRequired
+  height: PropTypes.string.isRequired,
+  child: PropTypes.node
 };
 
 export default ReallaryBasePlayer;

@@ -33,7 +33,7 @@ class ReallarySlider extends Component {
       transition: ease-in-out 1s;
     `;
 
-    return <Div />;
+    return <Div>{this.props.child}</Div>;
   }
 }
 
