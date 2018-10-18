@@ -1,0 +1,16 @@
+.sliders-enter {
+  transition: all 0.5s;
+  transform: translateX(-120%);
+}
+.sliders-enter .sliders-enter-active {
+  transform: translateX(0);
+}
+
+.sliders-exit {
+  transition: all 0.5s;
+  transform: translateX(120%);
+}
+
+.sliders-exit .sliders-exit-active {
+  transform: translateX(120%);
+}

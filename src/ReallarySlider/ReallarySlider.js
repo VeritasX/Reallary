@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import { TransitionGroup, CSSTransition } from 'react-transition-group';
+import './ReallarySlider.css';
 
 class ReallarySlider extends Component {
   componentDidMount() {
@@ -30,10 +32,15 @@ class ReallarySlider extends Component {
       background-position: center center;
       width: 100%;
       height: ${Height};
-      transition: ease-in-out 1s;
     `;
 
-    return <Div>{this.props.child}</Div>;
+    return (
+      <TransitionGroup component={Div}>
+        <CSSTransition classNames="sliders" timeout={{ enter: 100, exit: 100 }}>
+          <Div />
+        </CSSTransition>
+      </TransitionGroup>
+    );
   }
 }
 

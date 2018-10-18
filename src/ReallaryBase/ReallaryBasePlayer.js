@@ -46,7 +46,6 @@ class ReallaryBasePlayer extends Component {
   goToTheNextItem() {
     const newItem = this.state.currentItem + 1;
     const lengthOfData = this.state.source.length - 1;
-    console.log(this.state.currentItem);
     if (newItem <= lengthOfData) {
       this.setState({
         currentItem: newItem
