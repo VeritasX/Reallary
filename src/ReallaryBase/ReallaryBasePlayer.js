@@ -1,8 +1,10 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 import './ReallaryBasePlayer.css';
 import '../ReallarySlider/ReallarySlider';
 import ReallarySlider from '../ReallarySlider/ReallarySlider';
+import ReallaryPictureGallery from '../ReallaryPictures/ReallaryPictures';
 
 class ReallaryBasePlayer extends Component {
   constructor(props) {
@@ -13,7 +15,9 @@ class ReallaryBasePlayer extends Component {
       currentItem: 0,
       windowWidth: 0,
       windowHeight: 0,
-      height: props.height
+      height: props.height,
+      width: props.width,
+      thumbnails: null
     };
 
     this.isVideo = this.isVideo.bind(this);
@@ -75,8 +79,20 @@ class ReallaryBasePlayer extends Component {
     );
   }
 
-  isGallery(currentItem, source, thumbnails) {
-    // return the Photo Gallery Component wrapped with the thumbnail component
+  isGallery() {
+    return (
+      <ReallaryPictureGallery
+        source={this.state.source}
+        currentItem={this.state.currentItem}
+        height={this.state.height}
+        width={this.state.width}
+        windowWidth={this.state.windowWidth}
+        windowHeight={this.state.windowHeight}
+        nextFunction={this.goToTheNextItem}
+        child={this.props.child}
+        thumbnails={this.generateThumbnails}
+      />
+    );
   }
 
   changeSource() {
@@ -84,14 +100,33 @@ class ReallaryBasePlayer extends Component {
   }
 
   generateThumbnails() {
-    //generate the thumbnails for the videos or PhotoGallery
+    let thumbnailArray = this.state.source.map(item => {
+      return item.thumbNail;
+    });
+
+    const Thumbnail = styled.div`
+      background-image: url(${props => props.background});
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center center;
+      width: 100%;
+      height: 100%;
+    `;
+
+    return (
+      <Fragment>
+        {thumbnailArray.map(item => (
+          <Thumbnail background={item.src} key={item.key} />
+        ))}
+      </Fragment>
+    );
   }
 
   checkMediaType() {
     if (this.state.mediaType === 'video') {
       return this.isVideo(this.state.currentItem);
     } else if (this.state.mediaType === 'photo') {
-      return this.isGallery(this.state.currentItem);
+      return this.isGallery();
     } else if (this.state.mediaType === 'slider') {
       return this.isSlider(this.state.currentItem, this.state.source);
     } else {
@@ -111,7 +146,8 @@ ReallaryBasePlayer.propTypes = {
   mediaType: PropTypes.string.isRequired,
   thumbnails: PropTypes.array,
   height: PropTypes.string.isRequired,
-  child: PropTypes.node
+  child: PropTypes.node,
+  width: PropTypes.string
 };
 
 export default ReallaryBasePlayer;

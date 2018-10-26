@@ -7,6 +7,7 @@ class App extends Component {
     return (
       <div>
         <ReallaryBasePlayer source={data} mediaType="slider" height="480px" />
+        <ReallaryBasePlayer source={data} mediaType="photo" width={'900px'} height="600px" />
       </div>
     );
   }
