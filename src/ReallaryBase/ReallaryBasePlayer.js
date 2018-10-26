@@ -114,11 +114,11 @@ class ReallaryBasePlayer extends Component {
     `;
 
     return (
-      <Fragment>
+      <div className="thumbnailItem">
         {thumbnailArray.map(item => (
           <Thumbnail background={item.src} key={item.key} />
         ))}
-      </Fragment>
+      </div>
     );
   }
 
