@@ -1,18 +1,9 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import posed, { PoseGroup } from 'react-pose';
+import './ReallaryPictures.css';
 
 class ReallaryPictureGallery extends Component {
-  componentDidMount() {
-    this.transtion = setInterval(() => {
-      this.props.nextFunction();
-    }, 20000);
-  }
-
-  componentWillUnmount() {
-    clearInterval(this.transition);
-  }
-
   render() {
     let bgSize;
     let Height;
@@ -35,7 +26,7 @@ class ReallaryPictureGallery extends Component {
       background-repeat: no-repeat;
       background-position: center center;
       width: ${Width};
-      margin: 20px auto;
+      margin: 20px auto 0 auto;
       height: ${Height};
     `;
 
@@ -48,7 +39,7 @@ class ReallaryPictureGallery extends Component {
         <PoseGroup>
           <PosedWrap key={this.props.currentItem} />
         </PoseGroup>
-        <div className="reallary-thumbnails-gallery">{this.props.thumbnails()}</div>
+        <div className="reallary-thumbnails-gallery">{this.props.thumbnails}</div>
       </div>
     );
   }

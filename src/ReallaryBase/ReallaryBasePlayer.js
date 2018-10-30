@@ -1,7 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import './ReallaryBasePlayer.css';
 import '../ReallarySlider/ReallarySlider';
 import ReallarySlider from '../ReallarySlider/ReallarySlider';
 import ReallaryPictureGallery from '../ReallaryPictures/ReallaryPictures';
@@ -23,11 +22,12 @@ class ReallaryBasePlayer extends Component {
     this.isVideo = this.isVideo.bind(this);
     this.isSlider = this.isSlider.bind(this);
     this.isGallery = this.isGallery.bind(this);
-    this.changeSource = this.changeSource.bind(this);
+
     this.generateThumbnails = this.generateThumbnails.bind(this);
     this.checkMediaType = this.checkMediaType.bind(this);
     this.resizeHandler = this.resizeHandler.bind(this);
     this.goToTheNextItem = this.goToTheNextItem.bind(this);
+    this.clickAndGoToTheNextItem = this.clickAndGoToTheNextItem.bind(this);
   }
 
   resizeHandler() {
@@ -41,6 +41,12 @@ class ReallaryBasePlayer extends Component {
   componentDidMount() {
     this.resizeHandler();
     window.addEventListener('resize', this.resizeHandler.bind(this));
+
+    if (!this.state.thumbnails) {
+      this.setState({
+        thumbnails: this.generateThumbnails()
+      });
+    }
   }
 
   componentWillUnmount() {
@@ -59,6 +65,13 @@ class ReallaryBasePlayer extends Component {
         currentItem: 0
       });
     }
+  }
+
+  clickAndGoToTheNextItem(itemNumber) {
+    const newItem = itemNumber;
+    this.setState({
+      currentItem: newItem
+    });
   }
 
   isVideo(currentItem, source, thumbnails) {
@@ -90,18 +103,16 @@ class ReallaryBasePlayer extends Component {
         windowHeight={this.state.windowHeight}
         nextFunction={this.goToTheNextItem}
         child={this.props.child}
-        thumbnails={this.generateThumbnails}
+        thumbnails={this.state.thumbnails}
       />
     );
   }
 
-  changeSource() {
-    //change the source number of the component
-  }
-
   generateThumbnails() {
-    let thumbnailArray = this.state.source.map(item => {
-      return item.thumbNail;
+    let thumbnailArray = this.state.source.map((item, i) => {
+      let ItemToReturn = item.thumbNail;
+      ItemToReturn.parentNumber = i;
+      return ItemToReturn;
     });
 
     const Thumbnail = styled.div`
@@ -111,14 +122,17 @@ class ReallaryBasePlayer extends Component {
       background-position: center center;
       width: 100%;
       height: 100%;
+      cursor: pointer;
     `;
 
     return (
-      <div className="thumbnailItem">
+      <Fragment>
         {thumbnailArray.map(item => (
-          <Thumbnail background={item.src} key={item.key} />
+          <div className="thumbnail" key={item.key} onClick={() => this.clickAndGoToTheNextItem(item.parentNumber)}>
+            <Thumbnail background={item.src} />
+          </div>
         ))}
-      </div>
+      </Fragment>
     );
   }
 
