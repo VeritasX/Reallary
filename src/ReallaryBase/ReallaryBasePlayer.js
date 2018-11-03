@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import '../ReallarySlider/ReallarySlider';
 import ReallarySlider from '../ReallarySlider/ReallarySlider';
 import ReallaryPictureGallery from '../ReallaryPictures/ReallaryPictures';
-
+import ReallaryVideo from '../ReallaryVideo/ReallaryVideo';
 class ReallaryBasePlayer extends Component {
   constructor(props) {
     super();
@@ -74,11 +74,23 @@ class ReallaryBasePlayer extends Component {
     });
   }
 
-  isVideo(currentItem, source, thumbnails) {
-    //return the Video Component wrapped with the thumbnail component
+  isVideo() {
+    return (
+      <ReallaryVideo
+        source={this.state.source}
+        currentItem={this.state.currentItem}
+        height={this.state.height}
+        width={this.state.width}
+        windowWidth={this.state.windowWidth}
+        windowHeight={this.state.windowHeight}
+        nextFunction={this.goToTheNextItem}
+        child={this.props.child}
+        thumbnails={this.state.thumbnails}
+      />
+    );
   }
 
-  isSlider(currentItem, source) {
+  isSlider() {
     return (
       <ReallarySlider
         source={this.state.source}
@@ -110,9 +122,13 @@ class ReallaryBasePlayer extends Component {
 
   generateThumbnails() {
     let thumbnailArray = this.state.source.map((item, i) => {
-      let ItemToReturn = item.thumbNail;
-      ItemToReturn.parentNumber = i;
-      return ItemToReturn;
+      if (item.thumbNail) {
+        let ItemToReturn = item.thumbNail;
+        ItemToReturn.parentNumber = i;
+        return ItemToReturn;
+      } else {
+        return false;
+      }
     });
 
     const Thumbnail = styled.div`
@@ -125,15 +141,33 @@ class ReallaryBasePlayer extends Component {
       cursor: pointer;
     `;
 
-    return (
-      <Fragment>
-        {thumbnailArray.map(item => (
-          <div className="thumbnail" key={item.key} onClick={() => this.clickAndGoToTheNextItem(item.parentNumber)}>
-            <Thumbnail background={item.src} />
-          </div>
-        ))}
-      </Fragment>
-    );
+    const check = () => {
+      if (thumbnailArray) {
+        if (
+          thumbnailArray.every(item => {
+            return item;
+          })
+        ) {
+          return (
+            <Fragment>
+              {thumbnailArray.map(item => (
+                <div
+                  className="thumbnail"
+                  key={item.key}
+                  onClick={() => this.clickAndGoToTheNextItem(item.parentNumber)}
+                >
+                  <Thumbnail background={item.src} />
+                </div>
+              ))}
+            </Fragment>
+          );
+        }
+      } else {
+        return false;
+      }
+    };
+
+    return check();
   }
 
   checkMediaType() {

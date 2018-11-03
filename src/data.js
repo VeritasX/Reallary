@@ -14,72 +14,82 @@ import t5 from '../src/testpictures/Thumnails/5T.jpg';
 import t6 from '../src/testpictures/Thumnails/6T.jpg';
 import t7 from '../src/testpictures/Thumnails/7T.jpg';
 import t8 from '../src/testpictures/Thumnails/8T.jpg';
+import Video1 from '../src/testpictures/video/VID_20181031_121056.mp4';
 
-const data = [
-  {
-    src: test1,
-    altText: 'super cool picture',
-    thumbNail: {
-      src: t1,
-      key: 't1'
+const data = {
+  photos: [
+    {
+      src: test1,
+      altText: 'super cool picture',
+      thumbNail: {
+        src: t1,
+        key: 't1'
+      }
+    },
+    {
+      src: test2,
+      altText: 'super cool picture',
+      thumbNail: {
+        src: t2,
+        key: 't2'
+      }
+    },
+    {
+      src: test3,
+      altText: 'super cool picture',
+      thumbNail: {
+        src: t3,
+        key: 't3'
+      }
+    },
+    {
+      src: test4,
+      altText: 'super cool picture',
+      thumbNail: {
+        src: t4,
+        key: 't4'
+      }
+    },
+    {
+      src: test5,
+      altText: 'super cool picture',
+      thumbNail: {
+        src: t5,
+        key: 't5'
+      }
+    },
+    {
+      src: test6,
+      altText: 'super cool picture',
+      thumbNail: {
+        src: t6,
+        key: 't6'
+      }
+    },
+    {
+      src: test7,
+      altText: 'super cool picture',
+      thumbNail: {
+        src: t7,
+        key: 't7'
+      }
+    },
+    {
+      src: test8,
+      altText: 'super cool picture',
+      thumbNail: {
+        src: t8,
+        key: 't8'
+      }
     }
-  },
-  {
-    src: test2,
-    altText: 'super cool picture',
-    thumbNail: {
-      src: t2,
-      key: 't2'
+  ],
+
+  videos: [
+    {
+      src: Video1,
+      altText: 'Super Cool Vdieo'
     }
-  },
-  {
-    src: test3,
-    altText: 'super cool picture',
-    thumbNail: {
-      src: t3,
-      key: 't3'
-    }
-  },
-  {
-    src: test4,
-    altText: 'super cool picture',
-    thumbNail: {
-      src: t4,
-      key: 't4'
-    }
-  },
-  {
-    src: test5,
-    altText: 'super cool picture',
-    thumbNail: {
-      src: t5,
-      key: 't5'
-    }
-  },
-  {
-    src: test6,
-    altText: 'super cool picture',
-    thumbNail: {
-      src: t6,
-      key: 't6'
-    }
-  },
-  {
-    src: test7,
-    altText: 'super cool picture',
-    thumbNail: {
-      src: t7,
-      key: 't7'
-    }
-  },
-  {
-    src: test8,
-    altText: 'super cool picture',
-    thumbNail: {
-      src: t8,
-      key: 't8'
-    }
-  }
-];
+  ]
+};
 
 export default data;
