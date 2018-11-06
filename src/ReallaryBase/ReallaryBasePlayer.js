@@ -5,12 +5,13 @@ import '../ReallarySlider/ReallarySlider';
 import ReallarySlider from '../ReallarySlider/ReallarySlider';
 import ReallaryPictureGallery from '../ReallaryPictures/ReallaryPictures';
 import ReallaryVideo from '../ReallaryVideo/ReallaryVideo';
-import ReallaryPreload from '../ReallaryBase/ReallaryPreload';
+
 class ReallaryBasePlayer extends Component {
   constructor(props) {
     super();
     this.state = {
       source: props.source,
+      stored: null,
       mediaType: props.mediaType,
       currentItem: 0,
       windowWidth: 0,
@@ -175,7 +176,6 @@ class ReallaryBasePlayer extends Component {
     if (this.state.mediaType === 'video') {
       return this.isVideo(this.state.currentItem);
     } else if (this.state.mediaType === 'photo') {
-      ReallaryPreload.preloadImageAssets(this.state.source);
       return this.isGallery();
     } else if (this.state.mediaType === 'slider') {
       return this.isSlider(this.state.currentItem, this.state.source);

@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import ReallaryBasePlayer from './ReallaryBase/ReallaryBasePlayer';
 import data from './data';
+import ReallaryPreload from '../src/ReallaryBase/ReallaryPreload';
 
 class App extends Component {
   render() {
+    let photoData = ReallaryPreload.preloadImageAssets(data.photos);
     return (
       <div>
         <ReallaryBasePlayer source={data.photos} mediaType="slider" height="480px" />

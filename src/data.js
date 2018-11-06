@@ -21,6 +21,7 @@ const data = {
     {
       src: test1,
       altText: 'super cool picture',
+      preLoadKey: 't1I',
       thumbNail: {
         src: t1,
         key: 't1'
@@ -29,6 +30,7 @@ const data = {
     {
       src: test2,
       altText: 'super cool picture',
+      preLoadKey: 't2I',
       thumbNail: {
         src: t2,
         key: 't2'
@@ -37,6 +39,7 @@ const data = {
     {
       src: test3,
       altText: 'super cool picture',
+      preLoadKey: 't3I',
       thumbNail: {
         src: t3,
         key: 't3'
@@ -45,6 +48,7 @@ const data = {
     {
       src: test4,
       altText: 'super cool picture',
+      preLoadKey: 't4I',
       thumbNail: {
         src: t4,
         key: 't4'
@@ -53,6 +57,7 @@ const data = {
     {
       src: test5,
       altText: 'super cool picture',
+      preLoadKey: 't5I',
       thumbNail: {
         src: t5,
         key: 't5'
@@ -61,6 +66,7 @@ const data = {
     {
       src: test6,
       altText: 'super cool picture',
+      preLoadKey: 't6I',
       thumbNail: {
         src: t6,
         key: 't6'
@@ -69,6 +75,7 @@ const data = {
     {
       src: test7,
       altText: 'super cool picture',
+      preLoadKey: 't7I',
       thumbNail: {
         src: t7,
         key: 't7'
@@ -77,6 +84,7 @@ const data = {
     {
       src: test8,
       altText: 'super cool picture',
+      preLoadKey: 't8I',
       thumbNail: {
         src: t8,
         key: 't8'

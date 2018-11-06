@@ -1,23 +1,42 @@
-import axios from 'axios';
-
 const ReallaryPreload = (function preload() {
   function preloadImageAssets(content) {
-    content.map(function(item) {
-      if (item) {
-        axios
-          .get(item.src)
-          .then(function(response) {
-            const contentType = response.headers['content-type'];
-            console.log(response.data);
-          })
-          .catch(function(error) {
-            console.log(error);
-          });
-      } else {
-        console.error(item, 'is undefined');
-        return false;
-      }
+    function sortAndStoreData(data) {
+      let returnedData = {
+        fileType: null,
+        src: null,
+        preLoadKey: data.preLoadKey,
+        altText: data.altText
+      };
+
+      const newImage = new Image();
+      newImage.src = data.src;
+      returnedData.fileType =
+        'image/' +
+        data.src.split('.').filter(function(item) {
+          if (item === 'jpg' || item === 'png') {
+            return item;
+          }
+        })[0];
+
+      const newCanvas = document.createElement('canvas');
+      newCanvas.width = newImage.width;
+      newCanvas.height = newImage.height;
+      const context = newCanvas.getContext('2d');
+      context.drawImage(newImage, 0, 0);
+      const dataUrl = newCanvas.toDataURL(returnedData.fileType);
+      returnedData.src = dataUrl.replace(/^data:image\/(png|jpg);base64,/, '');
+
+      return returnedData;
+    }
+
+    function checkIfDataIsStored(data) {}
+    let PictureData = content.map(function(item) {
+      let content = sortAndStoreData(item);
+      console.log(content);
+      return content;
     });
+
+    localStorage.setItem('PictureData', JSON.stringify(PictureData));
   }
 
   function loadVideoAssets() {}
