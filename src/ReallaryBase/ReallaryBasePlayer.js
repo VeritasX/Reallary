@@ -49,6 +49,10 @@ class ReallaryBasePlayer extends Component {
         thumbnails: this.generateThumbnails()
       });
     }
+
+    // if(!this.state.source){
+    //   const store = JSON.parse(localStorage.getItem())
+    // }
   }
 
   componentWillUnmount() {
@@ -93,17 +97,19 @@ class ReallaryBasePlayer extends Component {
   }
 
   isSlider() {
-    return (
-      <ReallarySlider
-        source={this.state.source}
-        currentItem={this.state.currentItem}
-        height={this.state.height}
-        windowWidth={this.state.windowWidth}
-        windowHeight={this.state.windowHeight}
-        nextFunction={this.goToTheNextItem}
-        child={this.props.child}
-      />
-    );
+    if (this.state.source) {
+      return (
+        <ReallarySlider
+          source={this.state.source}
+          currentItem={this.state.currentItem}
+          height={this.state.height}
+          windowWidth={this.state.windowWidth}
+          windowHeight={this.state.windowHeight}
+          nextFunction={this.goToTheNextItem}
+          child={this.props.child}
+        />
+      );
+    }
   }
 
   isGallery() {
@@ -192,7 +198,6 @@ class ReallaryBasePlayer extends Component {
 }
 
 ReallaryBasePlayer.propTypes = {
-  source: PropTypes.array.isRequired,
   mediaType: PropTypes.string.isRequired,
   thumbnails: PropTypes.array,
   height: PropTypes.string.isRequired,

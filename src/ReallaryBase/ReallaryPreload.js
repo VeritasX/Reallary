@@ -1,5 +1,6 @@
 const ReallaryPreload = (function preload() {
-  function preloadImageAssets(content) {
+  function preloadImageAssets(content, store, param) {
+    var oldData = [];
     function sortAndStoreData(data) {
       let returnedData = {
         fileType: null,
@@ -7,8 +8,25 @@ const ReallaryPreload = (function preload() {
         preLoadKey: data.preLoadKey,
         altText: data.altText
       };
-
       const newImage = new Image();
+
+      newImage.onload = function() {
+        const newCanvas = document.createElement('canvas');
+        newCanvas.width = newImage.width;
+        newCanvas.height = newImage.height;
+        const context = newCanvas.getContext('2d');
+        context.drawImage(newImage, 0, 0);
+
+        const dataUrl = context.canvas.toDataURL();
+
+        returnedData.src = dataUrl;
+
+        console.log(oldData);
+        oldData.push(returnedData);
+        store[param] = oldData;
+        console.log(store[param]);
+      };
+
       newImage.src = data.src;
       returnedData.fileType =
         'image/' +
@@ -17,33 +35,17 @@ const ReallaryPreload = (function preload() {
             return item;
           }
         })[0];
-
-      const newCanvas = document.createElement('canvas');
-      newCanvas.width = newImage.width;
-      newCanvas.height = newImage.height;
-      const context = newCanvas.getContext('2d');
-      context.drawImage(newImage, 0, 0);
-      const dataUrl = newCanvas.toDataURL(returnedData.fileType);
-      returnedData.src = dataUrl.replace(/^data:image\/(png|jpg);base64,/, '');
-
-      return returnedData;
     }
 
-    function checkIfDataIsStored(data) {}
-    let PictureData = content.map(function(item) {
-      let content = sortAndStoreData(item);
-      console.log(content);
-      return content;
+    content.map(function(item) {
+      sortAndStoreData(item);
     });
 
-    localStorage.setItem('PictureData', JSON.stringify(PictureData));
+    return oldData;
   }
 
-  function loadVideoAssets() {}
-
   return {
-    preloadImageAssets,
-    loadVideoAssets
+    preloadImageAssets
   };
 })();
 
