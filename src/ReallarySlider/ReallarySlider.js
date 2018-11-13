@@ -18,7 +18,6 @@ class ReallarySlider extends Component {
     let Height;
 
     let backgroundPicture = `${this.props.source[this.props.currentItem].src}`;
-    console.log(backgroundPicture);
 
     if (this.props.windowWidth >= 900) {
       bgSize = 'cover';

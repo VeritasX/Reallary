@@ -1,7 +1,20 @@
 const ReallaryPreload = (function preload() {
-  function preloadImageAssets(content, store, param) {
+  async function preloadImageAssets(content, param) {
     var oldData = [];
-    function sortAndStoreData(data) {
+
+    function getStore(oldData, content) {
+      const newDataPromise = new Promise((resolve, reject) => {
+        if (oldData.length === content.length) {
+          resolve(oldData);
+        }
+      });
+
+      newDataPromise.then(data => console.log('I did it ', oldData)).catch(err => console.log(err));
+
+      //const checkData = setInterval(function(){console.log(newDataPromise)}, 1000)
+    }
+
+    function sortAndStoreData(data, iterator) {
       let returnedData = {
         fileType: null,
         src: null,
@@ -21,10 +34,7 @@ const ReallaryPreload = (function preload() {
 
         returnedData.src = dataUrl;
 
-        console.log(oldData);
         oldData.push(returnedData);
-        store[param] = oldData;
-        console.log(store[param]);
       };
 
       newImage.src = data.src;
@@ -35,17 +45,31 @@ const ReallaryPreload = (function preload() {
             return item;
           }
         })[0];
+      return oldData;
     }
 
-    content.map(function(item) {
-      sortAndStoreData(item);
+    var same = content.map(async function(item, i) {
+      var data = await sortAndStoreData(item, i);
+      return data;
     });
 
-    return oldData;
+    //getStore(same, content);
+
+    return same;
+  }
+
+  async function checkData(data) {
+    let newData;
+    if (Array.isArray(data)) {
+      newData = await JSON.stringify(data);
+    }
+
+    return await newData;
   }
 
   return {
-    preloadImageAssets
+    preloadImageAssets,
+    checkData
   };
 })();
 
